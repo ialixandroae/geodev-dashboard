@@ -1,0 +1,370 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+  <title>Calcite OAuthentication</title>
+  
+  <link rel="stylesheet" href="https://js.arcgis.com/4.7/esri/css/main.css">
+  <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.0.1/css/calcite-web.min.css">
+  <link rel="stylesheet" href="./style/style.css">
+
+  <script type="text/javascript" src="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.0.1/js/calcite-web.min.js"></script>
+  <script type="text/javascript" src="dojoConfig.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <script type="text/javascript" src="https://js.arcgis.com/4.7/"></script>
+  
+</head>
+
+<body>
+  <header class="top-nav fade-in" id="mainPageHeader">
+    <div class="grid-container">
+      <div class="column-24">
+        <div class="tablet-hide">
+          <a href="#" class="top-nav-title">Calcite OAuthentication</a>
+          <nav class="top-nav-list" role="navigation" aria-labelledby="topnav">
+            <a class="top-nav-link" href="https://developers.arcgis.com/documentation/" target="_blank">Docs</a>
+            <a class="top-nav-link" href="https://developers.arcgis.com/javascript/latest/sample-code/identity-oauth-basic/index.html" target="_blank">Demo OAuth</a>
+          </nav>
+
+          <nav class="top-nav-list right" role="navigation" aria-labelledby="usernav">
+            <a class="top-nav-link icon-ui-user margin-left-1" href="#" id="sign-in">Sign In</a>
+            <a class="top-nav-link icon-ui-sign-out margin-left-1" href="#" id="sign-out" style="display: none;">Sign Out</a>
+            <a class="top-nav-link js-drawer-toggle" data-drawer="top-nav">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" class="svg-icon">
+                <path d="M28 3.5A2.5 2.5 0 0 1 25.5 6h-21A2.5 2.5 0 0 1 2 3.5v-1A2.5 2.5 0 0 1 4.5 0h21A2.5 2.5 0 0 1 28 2.5v1zm0 11a2.5 2.5 0 0 0-2.5-2.5h-21A2.5 2.5 0 0 0 2 14.5v1A2.5 2.5 0 0 0 4.5 18h21a2.5 2.5 0 0 0 2.5-2.5v-1zm0 12a2.5 2.5 0 0 0-2.5-2.5h-21A2.5 2.5 0 0 0 2 26.5v1A2.5 2.5 0 0 0 4.5 30h21a2.5 2.5 0 0 0 2.5-2.5v-1z"
+                />
+              </svg>
+              More info</a>
+          </nav>
+
+
+          <div class="drawer drawer-right js-drawer" data-drawer="top-nav" tabindex="0">
+            <nav class="drawer-nav" role="navigation">
+              <aside class="side-nav">
+                <h2 class="side-nav-title">More info</h2>
+
+                <aside class="side-nav" aria-role="complementary">
+                  <h4 class="side-nav-title">Resources</h4>
+                  <nav role="navigation" aria-labelledby="sidenav">
+                    <a href="https://developers.arcgis.com/javascript/latest/" target="_blank" class="side-nav-link">ArcGIS API for JavaScript 4.7</a>
+                    <a href="http://esri.github.io/calcite-web/" target="_blank" class="side-nav-link">Calcite Web</a>
+                    <a href="https://github.com/ialixandroae/geodev-dashboard" target="_blank" class="side-nav-link">Project on GitHub</a>
+                    <a href="https://twitter.com/ialixandroae" target="_blank" class="side-nav-link">Twitter</a>
+                  </nav>
+                </aside>
+
+                <aside class="js-accordion accordion">
+                  <div class="accordion-section is-active">
+                    <h4 class="accordion-title">
+                      <span class="accordion-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 32 32" class="svg-icon">
+                          <path d="M28 9v5L16 26 4 14V9l12 12L28 9z" />
+                        </svg>
+                      </span>
+                       Location map
+                    </h4>
+                    <div class="accordion-content">
+                      <h4 class="accordion-title">Allow geolocalization to update map</h4>
+                      <div id="mainPageMap"></div>
+                    </div>
+                  </div>
+                </aside>
+              </aside>
+            </nav>
+          </div>
+
+        </div>
+
+        <div class="tablet-show top-nav-flex">
+          <header class="top-nav-flex-title">
+            <a href="/" class="top-nav-link">Calcite OAuthentication
+              <span class="phone-hide"></span>
+            </a>
+          </header>
+          
+          <nav class="top-nav-flex-list text-right" role="navigation" aria-labelledby="usernav">
+            <a class="top-nav-link icon-ui-user icon-ui-flush margin-right-1" href="#" aria-label="Sign In" id="sign-in-mobile">
+              <span class="margin-left-half phone-hide ">Sign In</span>
+            </a>
+            <a class="top-nav-link icon-ui-sign-out icon-ui-flush margin-right-1" href="#" aria-label="Sign Out" id="sign-out-mobile" style="display: none;">
+              <span class="margin-left-half phone-hide">Sign Out</span>
+            </a>
+            <a class="top-nav-link js-drawer-toggle" data-drawer="top-nav-mobile">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" class="svg-icon">
+                <path d="M28 3.5A2.5 2.5 0 0 1 25.5 6h-21A2.5 2.5 0 0 1 2 3.5v-1A2.5 2.5 0 0 1 4.5 0h21A2.5 2.5 0 0 1 28 2.5v1zm0 11a2.5 2.5 0 0 0-2.5-2.5h-21A2.5 2.5 0 0 0 2 14.5v1A2.5 2.5 0 0 0 4.5 18h21a2.5 2.5 0 0 0 2.5-2.5v-1zm0 12a2.5 2.5 0 0 0-2.5-2.5h-21A2.5 2.5 0 0 0 2 26.5v1A2.5 2.5 0 0 0 4.5 30h21a2.5 2.5 0 0 0 2.5-2.5v-1z"
+                />
+              </svg></a>
+
+          </nav>
+
+          <div class="drawer drawer-right js-drawer" data-drawer="top-nav-mobile" tabindex="0">
+            <nav class="drawer-nav" role="navigation">
+              <aside class="side-nav">
+                <h2 class="side-nav-title">More info</h2>
+            
+                <aside class="side-nav" aria-role="complementary">
+                  <h4 class="side-nav-title">Resources</h4>
+                  <nav role="navigation" aria-labelledby="sidenav">
+                    <a class="side-nav-link" href="https://developers.arcgis.com/documentation/" target="_blank">Docs</a>
+                    <a class="side-nav-link" href="https://developers.arcgis.com/javascript/latest/sample-code/identity-oauth-basic/index.html"
+                      target="_blank">Demo OAuth</a>
+                    <a href="https://developers.arcgis.com/javascript/latest/" target="_blank" class="side-nav-link">ArcGIS API for JavaScript 4.7</a>
+                    <a href="http://esri.github.io/calcite-web/" target="_blank" class="side-nav-link">Calcite Web</a>
+                    <a href="https://github.com/ialixandroae/geodev-dashboard" target="_blank" class="side-nav-link">Project on GitHub</a>
+                    <a href="https://twitter.com/ialixandroae" target="_blank" class="side-nav-link">Twitter</a>
+                  </nav>
+                </aside>
+            
+                <aside class="js-accordion accordion">
+                  <div class="accordion-section is-active">
+                    <h4 class="accordion-title">
+                      <span class="accordion-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 32 32" class="svg-icon">
+                          <path d="M28 9v5L16 26 4 14V9l12 12L28 9z" />
+                        </svg>
+                      </span>
+                      Location map 
+                    </h4>
+                    <div class="accordion-content">
+                      <h4 class="accordion-title">Allow geolocalization to update map</h4>
+                      <div id="mainPageMapMobile"></div>
+                    </div>
+                  </div>
+                </aside>
+              </aside>
+            </nav>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </header>
+  
+
+  <div class="wrapper" id="mainPageContent">
+    <div class="textcontent">
+      <div class="subtextcontent">
+        <h1 lang="en" class="avenir-demi title" style="text-shadow: 1px 1px 4px #000000;">OAuthentification App with your ArcGIS Account</h1>
+        <span class="divider"></span>
+        <p lang="en" class="modifier-class subtitle" style="text-shadow: 1px 1px 4px #000000;">Use this Calcite web app to explore your resources from your ArcGIS Account</p>
+      </div>
+    </div>
+
+    <div style='position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; z-index: 1; background: url("./data/main_background.jpg");background-size: cover; background-attachment: fixed;'>
+    </div>
+  </div>
+
+  <div class="wrapper" id="dashboardContent" style="display: none">
+    <header class="sub-nav" role="banner" style="background-color: #052942;"}>
+      <div class="grid-container">
+        <div class="column-24">
+          <h1 class="sub-nav-title text-white">Welcome <span id="userName">USER NAME</span></h1>
+        </div>
+      </div>
+    </header>
+
+    <div class="modifier-class trailer-2 js-tab-group tabs-gray" style="margin-top: 1%; height:100%;">
+      <nav class="tab-nav">
+        <a class="tab-title is-active js-tab">Resources dashboard</a>
+        <a class="tab-title js-tab">Maps</a>
+        <a class="tab-title js-tab">Apps</a>
+        <a class="tab-title js-tab">Infographics</a>
+      </nav>
+      <section class="tab-contents">
+        <article class="tab-section js-tab-section is-active">
+          <div class="panel panel-dark-blue">
+            <h4 class="trailer-half">No. of  resources: <span id="resourcesTotal"></span></h4>
+            <label>
+              Search
+              <input type="text" placeholder="search for items" class="modifier-class" id="searchAll" required>
+            </label>
+          </div>
+
+          <!-- <div class="block-group block-group-6-up tablet-block-group-2-up phone-block-group-1-up" id="resourcesCardDiv" style="margin-top: 20px;">
+          
+          </div> -->
+
+          <div id="resourcesCardDiv"></div>
+
+          
+        </article>
+
+        <article class="tab-section js-tab-section">
+          <div class="panel panel-dark-blue">
+            <h4 class="trailer-half">No. of maps: <span id="mapsTotal"></span></h4>
+            <label>
+              Search maps
+              <input type="text" placeholder="search for maps" class="modifier-class" id="searchMaps" required>
+            </label>
+          </div>
+
+          <div class="block-group block-group-5-up tablet-block-group-2-up phone-block-group-1-up" id="mapsCardDiv"></div>
+        </article>
+
+        <article class="tab-section js-tab-section">
+          <div class="panel panel-dark-blue">
+            <h4 class="trailer-half">No. of apps:<span id="appsTotal"></span></h4>
+            <label>
+              Search apps
+              <input type="text" placeholder="search for apps" class="modifier-class" id="searchApps" required>
+            </label>
+          </div>
+          
+          <div class="block-group block-group-5-up tablet-block-group-2-up phone-block-group-1-up" id="appsCardDiv"></div>
+        </article>
+
+        <article class="tab-section js-tab-section">
+          <h1 class="avenir-light">Your resources are as follows</h1>
+          <div class="overflow-auto">
+            <table class="table table-blue" id="resourcesTable">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Title</th>
+                  <th>Type</th>
+                  <th>Created at</th>
+                  <th>URL</th>
+                </tr>
+              </thead>
+              <tbody id="resourcesTableBody">
+              </tbody>
+            </table>
+          </div>
+
+          
+          <h5 class="avenir-light">Explore your data using the following charts</h5>
+          <aside class="js-accordion accordion">
+            <div class="accordion-section">
+              <h4 class="accordion-title">
+                <span class="accordion-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 32 32" class="svg-icon">
+                    <path d="M28 9v5L16 26 4 14V9l12 12L28 9z" />
+                  </svg>
+                </span>
+                Bar Chart
+              </h4>
+              <div class="accordion-content">
+                <div class="grid-container">
+                  <div class="column-24" style="height: 300px">
+                    <canvas id="chart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-section">
+              <h4 class="accordion-title">
+                <span class="accordion-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 32 32" class="svg-icon">
+                    <path d="M28 9v5L16 26 4 14V9l12 12L28 9z" />
+                  </svg>
+                </span>
+                Donught Chart
+              </h4>
+              <div class="accordion-content">
+                <div class="grid-container">
+                  <div class="column-8 center-column">
+                    <canvas id="pieChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-section">
+              <h4 class="accordion-title">
+                <span class="accordion-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 32 32" class="svg-icon">
+                    <path d="M28 9v5L16 26 4 14V9l12 12L28 9z" />
+                  </svg>
+                </span>
+                Time Chart
+              </h4>
+              <div class="accordion-content">
+                <div class="grid-container">
+                  <h1 class="avenir-light">Evolution of items in time</h1>
+                  <div class="column-24" id="divTimeChart" style="height: 300px">
+                    <canvas id="lineChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+          
+          <!-- <div class="grid-container">
+            <h1 class="avenir-light">Your resources are as follow</h1>
+            <div class="column-18">
+              <canvas id="chart"></canvas>
+            </div>
+
+            <div class="column-6">
+              <canvas id="pieChart"></canvas>
+            </div>
+          </div>
+
+          <div class="grid-container">
+            <h1 class="avenir-light">Evolution of items in time</h1>
+            <div class="column-24 tablet-column-12" id="divTimeChart" style="height: 300px">  
+              <canvas id="lineChart"></canvas>
+            </div>
+          </div> -->
+          
+        </article>
+      </section>
+    </div>
+  </div>
+
+  <footer class="footer leader-3" id="footer" style="display: none;">
+    <div class="grid-container">
+      <nav class="column-8">
+        <h6 class="font-size-5">
+          <strong>Ionut Alixandroae</strong>
+        </h6>
+  
+        <p class="leader-1 font-size--2">
+          <strong>Follow Me</strong>
+          </span>
+        </p>
+        <section class="footer-social-nav">
+          <a class="icon-social-twitter" href="https://twitter.com/ialixandroae" target="_blank"></a>
+          <a class="icon-social-github" href="https://github.com/ialixandroae" target="_blank"></a>
+          <a class="icon-social-linkedin" href="https://www.linkedin.com/in/ialixandroae/" target="_blank"></a>
+        </section>
+      </nav>
+  
+      <nav class="column-4 leader-1">
+        <h6 class="font-size--2">
+          <strong>Calcite
+            <span>OAuthentification</span>
+          </strong>
+        </h6>
+        <ul class="list-plain font-size--2">
+          <li>
+            <a class="link-off-black" href="https://developers.arcgis.com/documentation/" target="_blank">Docs</a>
+          </li>
+          <li>
+            <a class="link-off-black" href="https://developers.arcgis.com/javascript/latest/sample-code/identity-oauth-basic/index.html" target="_blank">Demo OAuth</a>
+          </li>
+          <li>
+            <a class="link-off-black" href="https://developers.arcgis.com/javascript/latest/" target="_blank">ArcGIS API for JavaScript</a>
+          </li>
+          <li>
+            <a class="link-off-black" href="http://esri.github.io/calcite-web/" target="_blank">Calcite Web</a>
+          </li>
+          <li>
+            <a class="link-off-black" href="https://github.com/ialixandroae/geodev-dashboard" target="_blank">Project on GitHub</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <hr>
+  </footer>
+  
+  <script>
+    calcite.init()
+  </script>
+
+</body>
+
+</html>

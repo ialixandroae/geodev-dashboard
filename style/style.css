@@ -1,0 +1,128 @@
+html,
+body{
+  font-family: "Avenir Next W01","Avenir Next W00","Avenir Next","Avenir","Helvetica Neue",sans-serif;
+  font-size: 14px;
+  width: 100%;
+  height: 98%;
+  margin: 0px;
+  padding: 0px;
+}
+
+#viewMap, #viewDiv {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+.action {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.textcontent {
+    color: white;
+    z-index: 2;
+    position: absolute;
+    text-align: center;
+    display: table;
+    width: 100%;
+    top: 40%;
+}
+
+.subtextcontent {
+    vertical-align: middle;
+    display: table-cell;
+    position: relative;
+}
+
+.divider {
+    display: block;
+    margin: 25px auto;
+    width: 135px;
+    max-width: 5.2vw;
+    background-color: #fecf16;
+    height: 2px;
+}
+
+.title {
+    font-size: 5rem;
+    font-weight: lighter;
+    line-height: initial;
+}
+
+.subtitle {
+    font-size: 23px;
+}
+
+.card-image {
+    width: 100%;
+    display: block;
+}
+
+figure img {
+    max-width: 100%;
+}
+
+.tab-title {
+  font-size: 1.1rem;
+}
+
+h1.avenir-light {
+  margin-top: 10px;
+}
+
+tr:hover{
+  color: white;
+  background-color: #60acd8;
+}
+
+
+.margin-left-half {
+  margin-right: 5px;
+}
+
+#resourcesTotal,
+#mapsTotal,
+#appsTotal {
+  position: relative;
+  top: 7px;
+  left: 5px;
+  font-size: 3rem;
+}
+
+#mainPageMap {
+  width: 100%;
+  height: 300px;
+  margin:0;
+  padding: 0;
+}
+
+#mainPageMapMobile {
+  width: 100%;
+  height: 300px;
+  margin:0;
+  padding: 0;
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 820px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+  }
+}

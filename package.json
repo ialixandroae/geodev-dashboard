@@ -1,0 +1,15 @@
+{
+  "name": "agol_dev_site",
+  "version": "1.0.0",
+  "description": "Web app using authentication with AGOL Dev account to see users`s resources",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "live-server --port=8081"
+  },
+  "author": "Ionut Alixandroae",
+  "license": "ISC",
+  "dependencies": {
+    "live-server": "^1.2.0"
+  }
+}
